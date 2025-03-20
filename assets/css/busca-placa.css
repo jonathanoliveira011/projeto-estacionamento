@@ -1,0 +1,104 @@
+:root {
+    --vermelho-etec: #B20000;
+    --branco-gelo: #F5F5F5;
+}
+
+body {
+    background-color: var(--vermelho-etec);
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.navbar {
+    padding: 3em 1em;
+}
+
+.card {
+    margin: 0 5rem;
+    border-radius: 40px;
+    height: 70vh;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-placa {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    color: var(--vermelho-etec);
+    margin: 1em 0;
+}
+
+.nav-opcao {
+    color: black;
+    border-bottom: 1px solid black;
+    margin: 0 0.5em;
+    border-radius: 0;
+}
+
+.nav-opcao:hover {
+    color: var(--vermelho-etec);
+    border-bottom: 1px solid var(--vermelho-etec);
+}
+
+/* FORMULARIO */
+.container-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 0 30em;
+
+}
+
+.btn-aviso {
+    background-color: var(--vermelho-etec);
+    color: var(--branco-gelo);
+    border-radius: 8px;
+    width: 100%;
+    margin: 2em 0;
+}
+
+/* INPUTS */
+
+.btn-selecao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background-color: #E0E0E0;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+/* Quando o botão for selecionado */
+.form-check-input:checked+.btn-selecao {
+    border-color: #B20000;
+    background-color: #F8D7DA;
+}
+
+.btn-selecao img {
+    width: 50px;
+    height: auto;
+}
+
+.btn-selecao span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #B20000;
+}
+
+/* Esconder os inputs */
+.form-check-input {
+    display: none;
+}

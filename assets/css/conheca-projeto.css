@@ -1,0 +1,44 @@
+:root {
+    --vermelho-etec: #B20000;
+    --branco-gelo: #F5F5F5;
+}
+
+body {
+    background-color: var(--vermelho-etec);
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.navbar {
+    padding: 3em 1em;
+}
+
+.card {
+    margin: 0 5rem;
+    border-radius: 40px;
+    height: 70vh;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* CONHEÇA NOSSA ESCOLA */
+.container-projeto {
+    padding: 2rem 3.5rem;
+}
+
+.titulo-projeto {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--vermelho-etec);
+    margin: 2rem 0;
+}
+
+.paragrafo-projeto {
+    text-align: justify;
+    font-weight: bold;
+}

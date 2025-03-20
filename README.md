@@ -37,9 +37,9 @@ projeto-estacionamento/
 │── config/                 # Arquivos de configuração do sistema
 │── public/                 # Scripts de ações
 │   ├── actions/            # Lógica de backend (inserir, editar, deletar)
-│── views/                  # Interface do usuário
-│   ├── components/         # Componentes reutilizáveis (navbar, formulários, tabelas)
-│   ├── pages/              # Páginas principais do sistema
+|   │── views/                  # Interface do usuário
+|      ├── components/         # Componentes reutilizáveis (navbar, formulários, tabelas)
+|      ├── pages/              # Páginas principais do sistema
 │── index.php               # Página inicial
 │── README.md               # Documentação do projeto
 ```

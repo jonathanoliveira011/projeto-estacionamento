@@ -1,73 +1,54 @@
 :root {
     --vermelho-etec: #B20000;
+    --vermelho-vivo: #ff0000;
     --branco-gelo: #F5F5F5;
+    --fonte-poppins: "Poppins", sans-serif;
 }
 
+/* GERAL */
 body {
     background-color: var(--vermelho-etec);
-    font-family: "Poppins", sans-serif;
+    font-family: var(--fonte-poppins);
     font-weight: 300;
     font-style: normal;
 }
 
+/* NAVBAR */
 .navbar {
-    padding: 3em 1em;
+    background-color: var(--vermelho-etec);
 }
 
-.nav-login {
-    /*margin-left: 10em;*/
+.btn-drop {
+    color: var(--branco-gelo);
 }
 
-.card {
-    margin: 0 5rem;
-    border-radius: 40px;
-    height: 80vh;
+.item-navbar {
+    color: var(--branco-gelo);
 }
 
-.card-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
+.item-navbar:hover {
+    color: var(--vermelho-vivo);
 }
 
-.titulo-login {
-    font-size: 2.5em;
-    font-weight: 600;
-    text-align: center;
-    color: var(--vermelho-etec);
+.card-message {
+    margin: 1em 2em;
 }
 
-.label-login {
-    font-size: 1.2em;
-    color: var(--vermelho-etec);
+/* CADASTRO DE VAGAS */
+.card-vagas {
+    margin: 1em 2em;
+
 }
 
-.logo-login {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    /* Centraliza a imagem */
+.card-table {
+    margin: 1em 2em;
+    max-height: 50vh;
+    overflow-y: scroll;
 }
 
-/* FORMULÁRIO */
-
-.formulario {
-    width: 50%;
-    margin: 0 1.5rem;
-}
-
-.btn-login {
+.btn-cadastrar {
     background-color: var(--vermelho-etec);
     color: var(--branco-gelo);
-    border: none;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    font-size: 1.2em;
-    font-weight: 500;
-    cursor: pointer;
-    align-content: center;
-    width: 100%;
 }
+
+/* CADASTRO DE PERFIL */

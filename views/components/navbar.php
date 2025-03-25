@@ -12,10 +12,10 @@
                     Cadastros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="../cadastro_vagas.php">Vagas</a>
-                    <a class="dropdown-item" href="#">Perfil</a>
-                    <a class="dropdown-item" href="#">Curso</a>
-                    <a class="dropdown-item" href="#">Ocorrência</a>
+                    <a class="dropdown-item" href="../frmcadastro_vagas.php">Vagas</a>
+                    <a class="dropdown-item" href="../frmcadastro_perfil.php">Perfil</a>
+                    <a class="dropdown-item" href="../frmcadastro_curso.php">Curso</a>
+                    <a class="dropdown-item" href="../frmcadastro_ocorrencia.php">Ocorrência</a>
                 </div>
             </li>
             <li class="nav-item">

@@ -27,7 +27,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" name="update-vaga">Salvar Alterações</button>
+                    <button type="submit" class="btn btn-vermelho" name="update-vaga">Salvar Alterações</button>
                 </div>
             </form>
         </div>

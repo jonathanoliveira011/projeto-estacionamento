@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<?php include('header.php'); ?>
+<?php include('./views/components/header.php'); ?>
 
 <body>
     <?php include('./views/components/navbar.php'); ?>
@@ -81,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
     <div class="card card-vagas">
         <div class="card-body">
             <h2>Gerenciamento de vagas</h2>
+            <br>
             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                 <div class="form-group">
                     <label for="vaga">Número da vaga</label>
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
                     </select>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-cadastrar" name="create-vaga">Cadastrar</button>
+                    <button type="submit" class="btn btn-vermelho" name="create-vaga">Cadastrar</button>
                 </div>
             </form>
         </div>
@@ -145,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
         </div>
     </div>
 
-    <?php include('footer.php'); ?>
+    <?php include('./views/components/footer.php'); ?>
     <!-- Este código inclui o modal (pop-up) de edição das vagas -->
     <?php include('views/components/modal_vagas.php') ?>
 

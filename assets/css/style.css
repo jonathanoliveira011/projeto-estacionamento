@@ -35,7 +35,7 @@ body {
 }
 
 /* CADASTRO DE VAGAS */
-.card-vagas {
+.card {
     margin: 1em 2em;
 
 }
@@ -46,7 +46,7 @@ body {
     overflow-y: scroll;
 }
 
-.btn-cadastrar {
+.btn-vermelho {
     background-color: var(--vermelho-etec);
     color: var(--branco-gelo);
 }

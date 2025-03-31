@@ -19,10 +19,10 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link item-navbar" href="#">Veículo</a>
+                <a class="nav-link item-navbar" href="../frmcadastro_veiculo.php">Veículos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link item-navbar" href="#">Pessoa</a>
+                <a class="nav-link item-navbar" href="../frmcadastro_pessoa.php">Pessoa</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link item-navbar" href="#">Relatórios</a>

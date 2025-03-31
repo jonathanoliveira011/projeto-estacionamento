@@ -12,6 +12,32 @@
                 <div class="modal-body">
                     <input type="hidden" id="edit_vaga_id" name="vaga_id">
 
+                    <div class="col-md-3">
+                        <?php
+                        $sql = "SELECT * FROM tblpessoa";
+                        $pessoas = mysqli_query($conexao, $sql);
+                        if (mysqli_num_rows($pessoas) > 0) { ?>
+                            <div class="form-group">
+                                <label for="selectPerfil">Pessoas</label>
+                                <select class="form-control" id="selectPerfil" name="cpProp" required>
+
+                                    <?php foreach ($pessoas as $pessoa) { ?>
+                                        <option value="<?= $pessoa['pesid'] ?>"><?= $pessoa['pesnome'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <?php
+                        } else { ?>
+                            <div class="form-group">
+                                <label for="disabledSelect">Pessoas</label>
+                                <select id="disabledSelect" class="form-control" required>
+                                    <option>Nenhuma pessoa cadastrada</option>
+                                </select>
+                            </div>
+                        <?php } ?>
+                    </div>
+
                     <div class="form-group">
                         <label for="edit_vaga">Número da Vaga</label>
                         <input type="number" class="form-control" id="edit_vaga" name="vaga" required>

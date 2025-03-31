@@ -13,6 +13,7 @@ body {
     font-style: normal;
 }
 
+
 /* NAVBAR */
 .navbar {
     background-color: var(--vermelho-etec);
@@ -51,4 +52,23 @@ body {
     color: var(--branco-gelo);
 }
 
-/* CADASTRO DE PERFIL */
+/* CADASTRO DE PESSOAS */
+
+.body_cadpessoa {
+    background-color: var(--vermelho-etec);
+    display: flex;
+}
+
+.div_head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_cadpessoa {
+    width: 150px;
+    margin: 1em;
+}
+
+input::selection {}

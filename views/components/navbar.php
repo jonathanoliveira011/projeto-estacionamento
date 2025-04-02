@@ -27,6 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link item-navbar" href="#">Relatórios</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link item-navbar" href="../frmbusca_placa.php">Buscar placa</a>
+            </li>
         </ul>
     </div>
 </nav>

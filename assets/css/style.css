@@ -71,4 +71,14 @@ body {
     margin: 1em;
 }
 
-input::selection {}
+/* BUSCA DE PLACA */
+.container-placa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    padding: 1em;
+}

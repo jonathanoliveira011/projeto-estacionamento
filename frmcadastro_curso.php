@@ -3,6 +3,8 @@ require './config/conexao.php';
 
 $mensagem = "";
 
+require_once 'sessao.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-curso'])) {
     $nome_curso = isset($_POST['nome_curso']) ? $_POST['nome_curso'] : null;
     $periocidade_curso = isset($_POST['periocidade_curso']) ? $_POST['periocidade_curso'] : null;

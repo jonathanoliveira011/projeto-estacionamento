@@ -3,6 +3,8 @@
 include('config/conexao.php');
 $mensagem = "";
 
+require_once 'sessao.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-ocorrencia'])) {
     $ocorrencia = $_POST['ocorrencia_name'];
 

@@ -3,6 +3,8 @@
 require('config/conexao.php');
 $mensagem = "";
 
+require_once 'sessao.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-veiculo'])) {
     $id_pessoa = intval($_POST['cpProp']);
     $marca = mysqli_real_escape_string($conexao, $_POST['nome_marca']);

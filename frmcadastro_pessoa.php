@@ -3,6 +3,8 @@
 include('config/conexao.php');
 $msg = "";
 
+require_once 'sessao.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-pessoa'])) {
     //Dados para a tabela de pessoa
     $rm = mysqli_real_escape_string($conexao, $_POST['cpRM']);

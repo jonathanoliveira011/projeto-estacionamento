@@ -1,5 +1,6 @@
 <?php
 require './config/conexao.php';
+require_once 'sessao.php';
 
 $mensagem = "";
 

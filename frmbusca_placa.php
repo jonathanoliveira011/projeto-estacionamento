@@ -3,6 +3,8 @@
 require_once('config/conexao.php');
 $mensagem = "";
 
+require_once 'sessao.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-ocorrencia-placa'])) {
     $placa = mysqli_real_escape_string($conexao, $_POST['cpPlaca']);
     $ocorrencia = intval($_POST['cpOcorrencia']);

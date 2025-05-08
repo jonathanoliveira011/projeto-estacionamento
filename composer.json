@@ -1,5 +1,6 @@
 {
     "require": {
-        "twilio/sdk": "^8.4"
+        "twilio/sdk": "^8.4",
+        "dompdf/dompdf": "^3.1"
     }
 }

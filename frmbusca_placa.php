@@ -1,8 +1,5 @@
 <?php
-
-require_once('config/conexao.php');
 $mensagem = "";
-
 require_once 'sessao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-ocorrencia-placa'])) {
@@ -63,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-ocorrencia-plac
 function enviaMensagem($numero, $mensagem)
 {
     $params = array(
-        'token' => 'XXX',
+        'token' => 'so7z1s2xejuaak5c',
         'to' => '+55' . $numero,
         'body' => $mensagem
     );
@@ -105,7 +102,7 @@ function enviaMensagem($numero, $mensagem)
 <body>
     <?php include('views/components/navbar.php') ?>
     <div class="container-placa">
-        <div class="card">
+        <div class="card card-busca-placa">
             <div class="card-body">
                 <?= $mensagem; ?>
                 <h2>Buscar placa</h2>

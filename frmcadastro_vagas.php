@@ -1,5 +1,5 @@
 <?php
-require './config/conexao.php';
+//require './config/conexao.php';
 require_once 'sessao.php';
 
 $mensagem = "";
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
     <?php include('./views/components/navbar.php'); ?>
 
     <div class="card-message"><?= $mensagem; ?></div>
-    <div class="card card-vagas">
+    <div class="card card-margin">
         <div class="card-body">
             <h2>Gerenciamento de vagas</h2>
             <br>
@@ -148,7 +148,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-vaga'])) {
     </div>
 
     <?php include('./views/components/footer.php'); ?>
-    <!-- Este código inclui o modal (pop-up) de edição das vagas -->
     <?php include('views/components/modal_vagas.php') ?>
 
 </body>

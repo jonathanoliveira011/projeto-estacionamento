@@ -1,6 +1,6 @@
 <?php
 
-include('config/conexao.php');
+//include('config/conexao.php');
 $mensagem = "";
 
 require_once 'sessao.php';
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-ocorrencia'])) 
 <body>
     <?php include('./views/components/navbar.php') ?>
     <div class="card-message"><?= $mensagem; ?></div>
-    <div class="card">
+    <div class="card card-margin">
         <div class="card-body">
             <h2>Gerenciamento de ocorrências</h2>
             <br>

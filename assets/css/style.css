@@ -35,10 +35,13 @@ body {
     margin: 1em 2em;
 }
 
-/* CADASTRO DE VAGAS */
-.card {
+.card-margin {
     margin: 1em 2em;
+}
 
+/* CADASTRO DE VAGAS */
+.card-vaga {
+    margin: 1em 2em;
 }
 
 .card-table {
@@ -79,6 +82,71 @@ body {
     align-items: center;
 }
 
+.card-busca-placa {
+    margin: 1em 2em;
+}
+
 .card {
     padding: 1em;
+}
+
+/* LOGIN */
+
+.corpo-login {
+    height: 100%;
+    background-color: #f8f9fa;
+}
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.card-login {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-login img {
+    width: 100px;
+    margin: 20px auto 10px;
+    display: block;
+}
+
+.label-campo {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--vermelho-etec);
+}
+
+.titulo-login {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--vermelho-etec);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.btn-login {
+    background-color: var(--vermelho-etec);
+    color: var(--branco-gelo);
+    font-weight: 600;
+    font-size: 1em;
+}
+
+/* PÁGINA PRINCIPAL */
+.dashboard {
+    width: max-content;
+    margin: 1em 2em;
+}
+
+.titulo-dash {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
 }

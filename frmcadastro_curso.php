@@ -1,5 +1,5 @@
 <?php
-require './config/conexao.php';
+//require './config/conexao.php';
 
 $mensagem = "";
 
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-curso'])) {
     <?php include('./views/components/navbar.php'); ?>
 
     <div class="card-message"><?= $mensagem; ?></div>
-    <div class="card card-vagas">
+    <div class="card card-margin">
         <div class="card-body">
             <h2>Gerenciamento de Cursos</h2>
             <br>

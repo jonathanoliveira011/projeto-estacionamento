@@ -1,7 +1,3 @@
-<?php
-session_start(); // Sempre no início para usar $_SESSION
-?>
-
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand item-navbar" href="../index.php">ETEC - Monte Mor</a>
     <button class="navbar-toggler btn-drop" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -27,10 +23,6 @@ session_start(); // Sempre no início para usar $_SESSION
                         <a class="dropdown-item" href="../frmcadastro_ocorrencia.php">Ocorrência</a>
                     </div>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link item-navbar" href="../frmcadastro_veiculo.php">Admin</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link item-navbar" href="../frmcadastro_veiculo.php">Veículos</a>
                 </li>
@@ -38,7 +30,7 @@ session_start(); // Sempre no início para usar $_SESSION
                     <a class="nav-link item-navbar" href="../frmcadastro_pessoa.php">Pessoa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item-navbar" href="#">Relatórios</a>
+                    <a class="nav-link item-navbar" href="../frmrelatorios.php">Relatórios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link item-navbar" href="../frmbusca_placa.php">Buscar placa</a>

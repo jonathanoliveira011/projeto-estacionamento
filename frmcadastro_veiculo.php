@@ -1,9 +1,9 @@
 <?php
 
-require('config/conexao.php');
+//require('config/conexao.php');
 $mensagem = "";
 
-require_once 'sessao.php';
+require_once 'sessao.php';    
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-veiculo'])) {
     $id_pessoa = intval($_POST['cpProp']);
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-veiculo'])) {
     <?php include('views/components/navbar.php') ?>
 
     <div class="card-message"><?= $mensagem; ?></div>
-    <div class="card card-vagas">
+    <div class="card card-margin">
         <div class="card-body">
             <h2>Gerenciamento de veículos</h2>
             <br>
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-veiculo'])) {
                             <select class="form-control" id="selectPerfil" name="cpProp" required>
 
                                 <?php foreach ($pessoas as $pessoa) { ?>
-                                    <option value="<?= $pessoa['pesid'] ?>"><?= $pessoa['pesnome'] ?>
+                                    <option value="<?= $pessoa['pesid'] ?>"><?= $pessoa['pesnome'] ?> - <?= $pessoa['pesrm'] ?>
                                     </option>
                                 <?php } ?>
                             </select>

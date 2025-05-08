@@ -11,7 +11,7 @@ $conne=mysqli_connect(HOST, USER, PASS, DBNAME);
 if(isset($_POST['login'])){
     $email=$_POST['email'];
     $pass=$_POST['pass'];
-    $query = 'SELECT * FROM tblusuario WHERE email=? and usrsenha=?';
+    $query = 'SELECT * FROM tblusuario WHERE email=? and usrsenha=? and pflid=1';
     $stmt=mysqli_prepare($conne,$query);
     mysqli_stmt_bind_param($stmt,'ss',$email,$pass);
     mysqli_stmt_execute($stmt);

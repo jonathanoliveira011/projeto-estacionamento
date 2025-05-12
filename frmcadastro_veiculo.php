@@ -3,7 +3,7 @@
 //require('config/conexao.php');
 $mensagem = "";
 
-require_once 'sessao.php';    
+require_once 'sessao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-veiculo'])) {
     $id_pessoa = intval($_POST['cpProp']);
@@ -12,21 +12,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-veiculo'])) {
     $placa = mysqli_real_escape_string($conexao, $_POST['nome_placa']);
 
     if (!empty($id_pessoa) && !empty($marca) && !empty($modelo) && !empty($placa)) {
-        $sql = "INSERT INTO tblpessoaveiculo (pesid, veimarca, veimodelo, veiplaca) VALUES ('$id_pessoa', '$marca','$modelo','$placa')";
+        $sql = "SELECT * FROM tblpessoaveiculo WHERE veiplaca = '$placa'";
+        $resultado = mysqli_query($conexao, $sql);
 
-        if (mysqli_query($conexao, $sql)) {
-            $mensagem = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Veículo cadastrado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button></div>";
+        if (mysqli_num_rows($resultado) > 0) {
+            $mensagem = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Já existe veículo com esta placa. Edite o registro já existente!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span></button></div>";
         } else {
-            $mensagem = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Erro ao cadastrar veículo: " . mysqli_error($conexao) . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button></div>";
+            $sql = "INSERT INTO tblpessoaveiculo (pesid, veimarca, veimodelo, veiplaca) VALUES ('$id_pessoa', '$marca','$modelo','$placa')";
+            if (mysqli_query($conexao, $sql)) {
+                $mensagem = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Veículo cadastrado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span></button></div>";
+            } else {
+                $mensagem = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Erro ao cadastrar veículo: " . mysqli_error($conexao) . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span></button></div>";
+            }
         }
     } else {
         $mensagem = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>Por favor, preencha todos os campos!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button></div>";
+                    <span aria-hidden='true'>&times;</span></button></div>";
     }
 }
 
@@ -52,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-veiculo'])) {
     $marca = mysqli_real_escape_string($conexao, $_POST['edit_marca']);
     $modelo = mysqli_real_escape_string($conexao, $_POST['edit_modelo']);
     $placa = mysqli_real_escape_string($conexao, $_POST['edit_placa']);
-    
+
     if (!empty($id_veiculo) && !empty($id_pessoa) && !empty($marca) && !empty($modelo) && !empty($placa)) {
         $sql = "UPDATE tblpessoaveiculo SET pesid = '$id_pessoa', veimarca = '$marca', veimodelo = '$modelo', veiplaca = '$placa' WHERE pveid = '$id_veiculo'";
 
@@ -111,16 +115,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-veiculo'])) {
                         </div>
                     <?php } ?>
                 </div>
+
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="vaga">Marca</label>
-                        <input type="text" class="form-control" id="marca" name="nome_marca" required>
+                    <label for="nome_marca">Marca</label>
+                    <input type="text" class="form-control" id="nome_marca" name="nome_marca" required>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="vaga">Modelo</label>
-                        <input type="text" class="form-control" id="modelo" name="nome_modelo" required>
+                    <label for="nome_modelo">Modelo</label>
+                    <input type="text" class="form-control" id="nome_modelo" name="nome_modelo" required>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -181,7 +186,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-veiculo'])) {
             </table>
         </div>
     </div>
-
     <?php include('views/components/footer.php') ?>
     <?php include('views/components/modal_veiculo.php') ?>
 </body>

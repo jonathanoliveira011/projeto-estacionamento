@@ -10,7 +10,6 @@
 
             <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] === true): ?>
                 <!-- MENU VISÍVEL APENAS PARA LOGADOS -->
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle item-navbar" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,9 +45,6 @@
 
                 <li class="nav-item">
                     <a class="nav-link item-navbar" href="../login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link item-navbar" href="../cadastro.php">Cadastro</a>
                 </li>
 
             <?php endif; ?>

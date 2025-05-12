@@ -15,7 +15,7 @@ function gerarRelatorio($conteudo, $nome_relatorio, $orientacao)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['emitir-relatorio'])) {
-    $tipo_relatorio = $_POST['tipo-relatorio'];
+    $tipo_relatorio = mysqli_real_escape_string($conexao, $_POST['tipo-relatorio']);
 
     switch ($tipo_relatorio) {
         case 'veiculos_cadastrados':
@@ -55,9 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['emitir-relatorio'])) {
 
 
         case 'ocorrencias_registradas':
-            $placa = $_POST['placa'];
-            $data_inicio = $_POST['data_inicio'];
-            $data_final = $_POST['data_final'];
+            $placa = mysqli_real_escape_string($conexao, $_POST['placa']);
+            $data_inicio = mysqli_real_escape_string($conexao, $_POST['data_inicio']);
+            $data_final = mysqli_real_escape_string($conexao, $_POST['data_final']);
 
             if (!empty($placa)) {
                 $sql_ocorrencias = "SELECT 

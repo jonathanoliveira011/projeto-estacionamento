@@ -150,3 +150,17 @@ body {
     font-weight: 600;
     margin-bottom: 0.5em;
 }
+
+/* SENHA TEMPORÁRIA */
+.titulo-senha {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--vermelho-etec);
+    text-align: center;
+}
+
+.subtitulo-senha {
+    font-size: 1em;
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.5);
+}

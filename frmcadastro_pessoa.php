@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-pessoa'])) {
     if (mysqli_query($conexao, $sql)) {
         $idpessoa = mysqli_insert_id($conexao);
         if (!empty($idpessoa)) {
-            $sql_acesso = "INSERT INTO tblusuario (pesid, usrnome, usrsenha, pflid, usrstatus) VALUES ('$idpessoa','$nomeuser','$senha','$perfil','1')";
+            $sql_acesso = "INSERT INTO tblusuario (pesid, usrnome, usrsenha, pflid, usrstatus) VALUES ('$idpessoa','$nomeuser','$senha_cripto','$perfil','1')";
             if (mysqli_query($conexao, $sql_acesso)) {
                 $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Pessoa cadastrada com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span></button></div>";
@@ -82,6 +82,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-pessoa'])) {
         <span aria-hidden='true'>&times;</span></button></div>";
     }
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['altera-status'])) {
+    $pessoa_id = mysqli_real_escape_string($conexao, $_POST['altera-status']);
+    $sql = "SELECT usrstatus FROM tblusuario WHERE pesid = $pessoa_id";
+    $resultado = mysqli_query($conexao, $sql);
+    $row = mysqli_fetch_assoc($resultado);
+
+    if ($row['usrstatus'] == 1) {
+        $sql = "UPDATE tblusuario SET usrstatus = 0 WHERE pesid = $pessoa_id";
+        if (mysqli_query($conexao, $sql)) {
+            $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Cadastro desativado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span></button></div>";
+        }
+    } else {
+        $sql = "UPDATE tblusuario SET usrstatus = 1 WHERE pesid = $pessoa_id";
+        if (mysqli_query($conexao, $sql)) {
+            $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Cadastro ativado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span></button></div>";
+        }
+    }
+
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resetar-senha'])) {
+    $pessoa_id = mysqli_real_escape_string($conexao, $_POST['resetar-senha']);
+    $sql = "UPDATE tblusuario SET usrsenha = '123456', usrsenha_temporaria = '1' WHERE pesid = $pessoa_id";
+    if (mysqli_query($conexao, $sql)) {
+        $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Senha resetada com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span></button></div>";
+    } else {
+        $msg = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Erro ao resetar senha: " . mysqli_error($conexao) . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span></button></div>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -92,10 +127,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-pessoa'])) {
     <?php include('./views/components/navbar.php') ?>
 
     <!-- Cadastro de pessoas -->
+    <div class="card-message"><?= $msg ?></div>
     <div class="card card-margin">
         <div class="card-body">
             <h2>Gerenciamento de pessoas</h2>
-            <br>
             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" class="form-row" enctype="multipart/form-data">
 
                 <div class="col-md-3">
@@ -221,9 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-pessoa'])) {
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-vermelho" name="create-pessoa">Cadastrar</button>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group"><?= $msg ?></div>
-                </div>
+
 
             </form>
         </div>
@@ -275,6 +308,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-pessoa'])) {
                                         data-perfil="<?= $pessoa['pflid'] ?>">
                                         <span class="bi-pencil-fill"></span>&nbsp;Editar
                                     </button>
+                                    <?php if ($pessoa['usrstatus'] == 1) { ?>
+                                        <form action="" method="POST" class="d-inline">
+                                            <button onclick="return confirm('Tem certeza que deseja desativar o cadastro ?')"
+                                                type="submit" name="altera-status" value="<?= $pessoa['pesid'] ?>"
+                                                class="btn btn-danger btn-sm"><span
+                                                    class="bi-dash-circle"></span>&nbsp;Desativar</button>
+                                        </form>
+                                    <?php } else { ?>
+                                        <form action="" method="POST" class="d-inline">
+                                            <button onclick="return confirm('Tem certeza que deseja ativar o cadastro ?')"
+                                                type="submit" name="altera-status" value="<?= $pessoa['pesid'] ?>"
+                                                class="btn btn-warning btn-sm"><span class="bi-check"></span>&nbsp;Ativar</button>
+                                        </form>
+                                    <?php } ?>
+
+                                    <form action="" method="POST" class="d-inline">
+                                        <button onclick="return confirm('Tem certeza que deseja resetar a senha ?')"
+                                            type="submit" name="resetar-senha" value="<?= $pessoa['pesid'] ?>"
+                                            class="btn btn-secondary btn-sm"><span class="bi-x"></span>&nbsp;Resetar
+                                            senha</button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php }

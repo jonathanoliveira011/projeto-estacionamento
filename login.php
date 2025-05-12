@@ -3,7 +3,6 @@ require_once('./config/conexao.php');
 session_start();
 $mensagem = "";
 
-// Quando clicar no botão "login"
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conexao, $_POST['username']);
     $senha = mysqli_real_escape_string($conexao, $_POST['pass']);
@@ -14,14 +13,55 @@ if (isset($_POST['login'])) {
 
     if (mysqli_num_rows($resultado) == 1) {
         $usuario = mysqli_fetch_assoc($resultado);
-
-        // Comparar senha enviada com senha do banco (se usar senha simples)
         if ($senha === $usuario['usrsenha']) {
-            // Login correto
-            $_SESSION['logado'] = true;
-            $_SESSION['usuario'] = $usuario['pesid'];
-            header('Location: index.php');
-            exit();
+            // Verifica se o usuário está ativo
+            if ($usuario['usrstatus'] == 1) {
+                // Verifica se a senha é temporária
+                if ($usuario['usrsenha_temporaria'] == 1) {
+                    $_SESSION['user_id'] = $usuario['pesid'];
+                    header('Location: frmsenha_temporaria.php');
+                } else {
+                    $_SESSION['logado'] = true;
+                    $_SESSION['usuario'] = $usuario['pesid'];
+                    header('Location: index.php');
+                }
+            } else {
+                $mensagem = "Usuário inativo.";
+            }
+        } else {
+            $mensagem = "Senha incorreta.";
+        }
+    } else {
+        $mensagem = "Usuário não encontrado.";
+    }
+}
+
+
+// Quando clicar no botão "login"
+if (isset($_POST['login2'])) {
+    $username = mysqli_real_escape_string($conexao, $_POST['username']);
+    $senha = mysqli_real_escape_string($conexao, $_POST['pass']);
+
+    // Consulta o usuário no banco
+    $query = "SELECT * FROM tblusuario WHERE usrnome = '$username' LIMIT 1";
+    $resultado = mysqli_query($conexao, $query);
+
+    if (mysqli_num_rows($resultado) == 1) {
+        $usuario = mysqli_fetch_assoc($resultado);
+        if ($senha === $usuario['usrsenha']) {
+            if ($usuario['usrsenha_temporaria'] == 0) {
+                $_SESSION['user_id'] = $usuario['id'];
+                header('Location: frmsenha_temporaria.php');
+            } else {
+                if ($usuario['usrstatus'] == 1) {
+                    $_SESSION['logado'] = true;
+                    $_SESSION['usuario'] = $usuario['pesid'];
+                    header('Location: index.php');
+                } else {
+                    $mensagem = "Usuário inativo.";
+                }
+            }
+
         } else {
             $mensagem = "Senha incorreta.";
         }
@@ -33,7 +73,6 @@ if (isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <?php include('./views/components/header.php'); ?>
 
 <body class="corpo-login">
@@ -63,34 +102,6 @@ if (isset($_POST['login'])) {
             </form>
         </div>
     </div>
-    <!--
-    <div class='container'>
-        <div class='row'>
-            <div class='col-lg-4'></div>
-            <div class='col-lg-4'>
-
-                <?php if (!empty($mensagem)): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo $mensagem; ?>
-                    </div>
-                <?php endif; ?>
-
-                <form method='POST'>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name='username' id="floatingInput" required>
-                        <label for="floatingInput">Nome de usuário</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" name='pass' id="floatingPassword"
-                            placeholder="Password" required>
-                        <label for="floatingPassword">Password</label>
-                    </div>
-                    <input class="btn btn-primary" type="submit" value='Login' name='login'>
-                </form>
-            </div>
-            <div class='col-lg-4'></div>
-        </div>
-    </div>-->
 </body>
 
 </html>

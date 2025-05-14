@@ -36,39 +36,6 @@ if (isset($_POST['login'])) {
     }
 }
 
-
-// Quando clicar no botão "login"
-if (isset($_POST['login2'])) {
-    $username = mysqli_real_escape_string($conexao, $_POST['username']);
-    $senha = mysqli_real_escape_string($conexao, $_POST['pass']);
-
-    // Consulta o usuário no banco
-    $query = "SELECT * FROM tblusuario WHERE usrnome = '$username' LIMIT 1";
-    $resultado = mysqli_query($conexao, $query);
-
-    if (mysqli_num_rows($resultado) == 1) {
-        $usuario = mysqli_fetch_assoc($resultado);
-        if ($senha === $usuario['usrsenha']) {
-            if ($usuario['usrsenha_temporaria'] == 0) {
-                $_SESSION['user_id'] = $usuario['id'];
-                header('Location: frmsenha_temporaria.php');
-            } else {
-                if ($usuario['usrstatus'] == 1) {
-                    $_SESSION['logado'] = true;
-                    $_SESSION['usuario'] = $usuario['pesid'];
-                    header('Location: index.php');
-                } else {
-                    $mensagem = "Usuário inativo.";
-                }
-            }
-
-        } else {
-            $mensagem = "Senha incorreta.";
-        }
-    } else {
-        $mensagem = "Usuário não encontrado.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -86,8 +53,14 @@ if (isset($_POST['login2'])) {
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="senha" class="form-label label-campo">Senha</label>
-                    <input type="password" class="form-control" id="pass" name="pass" required>
+                    <label for="pass" class="form-label label-campo">Senha</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="pass" name="pass" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-login" type="button" id="show-password"><i class="bi bi-eye-fill"
+                                    id="icon-pass"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn w-100 btn-login" name='login'>Entrar</button>
@@ -102,6 +75,21 @@ if (isset($_POST['login2'])) {
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById('show-password').addEventListener('click', function () {
+            var passwordField = document.getElementById('pass');
+            var icon = document.getElementById('icon-pass');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            }
+        });
+    </script>
 </body>
 
 </html>

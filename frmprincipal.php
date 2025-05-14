@@ -49,7 +49,7 @@ try {
             </p>
             <ul class="lista-projeto">
                 <li class="item-projeto">Desenvolvedores:
-                    <span class="texto-projeto">Abner, Andrezza, Celso, Flavio, Jonathan, Leandro e Lucas</span>
+                    <span class="texto-projeto">Abner, Andrezza, Celso, Flavio, Jonathan, Leandro, Lucas e Marcio</span>
                 </li>
                 <li class="item-projeto">Orientador:
                     <span class="texto-projeto">Prof. Gabriel Vitoriano Braga</span>

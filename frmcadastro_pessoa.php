@@ -30,16 +30,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create-pessoa'])) {
     $sql = "INSERT INTO tblpessoa (pesrm, pesnome, pesemail, pescpf, pestelefone, curid, pesturma, pesobservacao, pesfoto) VALUES 
     ('$rm','$nome','$email','$cpf','$telefone','$curso','$turma','$observacoes','$mysqlImg')";
 
-    if (mysqli_query($conexao, $sql)) {
-        $idpessoa = mysqli_insert_id($conexao);
-        if (!empty($idpessoa)) {
-            $sql_acesso = "INSERT INTO tblusuario (pesid, usrnome, usrsenha, pflid, usrstatus) VALUES ('$idpessoa','$nomeuser','$senha_cripto','$perfil','1')";
-            if (mysqli_query($conexao, $sql_acesso)) {
-                $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Pessoa cadastrada com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    $sql_verificacao_pessoa = "SELECT pescpf FROM tblpessoa WHERE pescpf = '$cpf' LIMIT 1;";
+    $resultado = mysqli_query($conexao, $sql_verificacao_pessoa);
+
+    if (mysqli_num_rows($resultado) > 0) {
+        $msg = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>CPF já cadastrado!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span></button></div>";
+    } else {
+        if (mysqli_query($conexao, $sql)) {
+            $idpessoa = mysqli_insert_id($conexao);
+            if (!empty($idpessoa)) {
+                $sql_acesso = "INSERT INTO tblusuario (pesid, usrnome, usrsenha, pflid, usrstatus) VALUES ('$idpessoa','$nomeuser','$senha_cripto','$perfil','1')";
+                if (mysqli_query($conexao, $sql_acesso)) {
+                    $msg = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Pessoa cadastrada com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span></button></div>";
-            } else {
-                $mensagem = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Erro ao cadastrar pessoa: " . mysqli_error($conexao) . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                } else {
+                    $msg = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Erro ao cadastrar pessoa: " . mysqli_error($conexao) . "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span></button></div>";
+                }
             }
         }
     }
@@ -153,13 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resetar-senha'])) {
 
                 <div class="col-md-2">
                     <label for="id_cpf" class="form-label">CPF</label>
-                    <input type="text" class="form-control form-control-sm" id="CPFInput" oninput="criaMascara('CPF')"
-                        maxlength="11" name="cpCPF" required>
+                    <input type="text" class="form-control form-control-sm" id="CPFInput" name="cpCPF" required>
                 </div>
                 <div class=" col-md-2">
                     <label for="CelularInput" class="form-label">Telefone</label>
-                    <input type="text" class="form-control form-control-sm" id="CelularInput"
-                        oninput="criaMascara('Celular')" maxLength="11" name="cpTELEFONE" required>
+                    <input type="text" class="form-control form-control-sm" id="CelularInput" name="cpTELEFONE"
+                        required>
                 </div>
                 <?php
                 $sql = "SELECT * FROM tblcurso";
@@ -343,20 +350,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resetar-senha'])) {
     <?php include('views/components/footer.php') ?>
     <?php include('views/components/modal_pessoas.php') ?>
     <script>
-        function criaMascara(mascaraInput) {
-            const maximoInput = document.getElementById(`${mascaraInput}Input`).maxLength;
-            let valorInput = document.getElementById(`${mascaraInput}Input`).value;
-            let valorSemPonto = document.getElementById(`${mascaraInput}Input`).value.replace(/([^0-9])+/g, "");
-            const mascaras = {
-                CPF: valorInput.replace(/[^\d]/g, "").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
-                Celular: valorInput.replace(/[^\d]/g, "").replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3"),
-                CEP: valorInput.replace(/[^\d]/g, "").replace(/(\d{5})(\d{3})/, "$1-$2"),
-                CNJ: valorInput.replace(/[^\d]/g, "").replace(/(\d{7})(\d{2})(\d{4})(\d{1})(\d{2})(\d{4})/, "$1-$2.$3.$4.$5.$6"),
-            };
-
-            valorInput.length === maximoInput ? document.getElementById(`${mascaraInput}Input`).value = mascaras[mascaraInput]
-                : document.getElementById(`${mascaraInput}Input`).value = valorSemPonto;
-        };
+        $('#CelularInput').mask('(00) 00000-0000');
+        $('#CPFInput').mask('000.000.000-00');
     </script>
 </body>
 

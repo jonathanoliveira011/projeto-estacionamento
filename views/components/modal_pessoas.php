@@ -32,13 +32,13 @@
 
                     <div class="form-group">
                         <label for="id_cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control form-control-sm" id="EditCPFInput"
-                            oninput="criaMascara('CPF')" maxlength="11" name="CpfNovo" required>
+                        <input type="text" class="form-control form-control-sm" id="EditCPFInput" name="CpfNovo"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="CelularInput" class="form-label">Telefone</label>
                         <input type="text" class="form-control form-control-sm" id="EditCelularInput"
-                            oninput="criaMascara('Celular')" maxLength="11" name="TelefoneNovo" required>
+                            name="TelefoneNovo" required>
                     </div>
                     <?php
                     $sql = "SELECT * FROM tblcurso";
@@ -159,16 +159,6 @@
         });
     });
 
-    function criaMascara(mascaraInput) {
-        const maximoInput = document.getElementById(`Edit${mascaraInput}Input`).maxLength;
-        let valorInput = document.getElementById(`Edit${mascaraInput}Input`).value;
-        let valorSemPonto = document.getElementById(`Edit${mascaraInput}Input`).value.replace(/([^0-9])+/g, "");
-        const mascaras = {
-            CPF: valorInput.replace(/[^\d]/g, "").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4"),
-            Celular: valorInput.replace(/[^\d]/g, "").replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3"),
-        };
-
-        valorInput.length === maximoInput ? document.getElementById(`Edit${mascaraInput}Input`).value = mascaras[mascaraInput]
-            : document.getElementById(`Edit${mascaraInput}Input`).value = valorSemPonto;
-    };
+    $('#EditCelularInput').mask('(00) 00000-0000');
+    $('#EditCPFInput').mask('000.000.000-00');
 </script>
